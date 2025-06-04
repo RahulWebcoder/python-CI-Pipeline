@@ -11,7 +11,8 @@ html_content = f"""
 </html>
 """
 
-with open("index.html", "w") as f:
+# ✅ Use encoding='utf-8' to support emoji and special characters
+with open("index.html", "w", encoding="utf-8") as f:
     f.write(html_content)
 
 print("index.html generated")
