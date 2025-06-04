@@ -6,6 +6,9 @@ on:
     types:
       - completed
 
+permissions:
+  contents: write  # ✅ This gives GitHub Actions permission to push to your repo
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -21,11 +24,10 @@ jobs:
           python-version: '3.10'
 
       - name: Run Report Generator
-        run: |
-          python generate_report.py
+        run: python generate_report.py
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # ✅ Built-in token with correct access
+          publish_dir: ./                            # 📁 deploy the current folder (index.html is here)
