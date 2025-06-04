@@ -7,7 +7,7 @@ on:
       - completed
 
 permissions:
-  contents: write  # ✅ This gives GitHub Actions permission to push to your repo
+  contents: write  # ✅ Needed to push to gh-pages branch
 
 jobs:
   deploy:
@@ -29,5 +29,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # ✅ Built-in token with correct access
-          publish_dir: ./                            # 📁 deploy the current folder (index.html is here)
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
