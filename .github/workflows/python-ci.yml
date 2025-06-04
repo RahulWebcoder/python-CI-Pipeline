@@ -1,12 +1,41 @@
 # .github/workflows/python-ci.yml
+# name: Python CI
+
+# on:
+#   push:
+#     branches:
+#         - master
+  
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     strategy:
+#       matrix:
+#         python-version: ["3.10", "3.11"]  # Test on multiple Python versions
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Set up Python ${{ matrix.python-version }}
+#         uses: actions/setup-python@v4
+#         with:
+#           python-version: ${{ matrix.python-version }}
+
+#       - name: check version
+#         run: python --version
+
+#       - name: Run Python script
+#         run: python test_main.py    
+
 
 name: Python CI
 
 on:
   push:
-    branches:
-        - master
-  
+    branches: [ master ]
 
 jobs:
   build:
@@ -14,7 +43,7 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ["3.10", "3.11"]  # Test on multiple Python versions
+        python-version: ["3.10"]
 
     steps:
       - name: Checkout code
@@ -24,9 +53,18 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-
+          
       - name: check version
-        run: python --version
+        run: python --version    
 
-      - name: Run Python script
-        run: python test_main.py    
+      - name: Run Python Test
+        run: python test_main.py
+
+      - name: Generate HTML Report
+        run: python generate_report.py
+
+      - name: Upload index.html as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: html-report
+          path: index.html
