@@ -27,6 +27,6 @@ jobs:
 
       - name: check version
         run: python --version
-            
+
       - name: Run Python script
-        run: python main.py    
+        run: python test_main.py    
